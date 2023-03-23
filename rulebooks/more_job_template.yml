@@ -14,6 +14,8 @@
           job_args:
             extra_vars:
               hello: Fred
+          retries: 1
+          delay: 10
     - name: Debug
       condition: event.i == 2
       action:
@@ -29,9 +31,3 @@
         set_fact:
           fact:
             name: fred
-    - name: retract_fact
-      condition: event.message == "hello world"
-      action:
-        retract_fact:
-          fact:
-            message: hello world
