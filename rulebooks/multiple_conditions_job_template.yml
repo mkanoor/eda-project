@@ -1,0 +1,47 @@
+---
+- name: Test run job templates
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: 10
+  rules:
+    - name: Run job template
+      condition: event.i == 1
+      actions:
+        - run_job_template:
+            name: Hello World
+            organization: Default
+            job_args:
+              extra_vars:
+                hello: Fred
+        - debug:
+            msg:
+              - debug message 1
+              - debug message 2
+        - print_event:
+            pretty: true
+    - name: Debug
+      condition: event.i == 2
+      action:
+        debug:
+    - name: print_event
+      condition:
+        all: 
+          - event.i == 3
+          - event.i == 7
+      action:
+        print_event:
+          pretty: true
+    - name: set_fact
+      condition: event.i == 4
+      action:
+        set_fact:
+          fact:
+            name: fred
+    - name: retract_fact
+      condition: event.message == "hello world"
+      action:
+        retract_fact:
+          fact:
+            message: hello world
