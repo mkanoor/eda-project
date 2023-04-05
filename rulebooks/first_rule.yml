@@ -1,0 +1,43 @@
+---
+- name: ruleset1
+  hosts: all
+  sources:
+    - name: sourceA
+      ansible.eda.range:
+        limit: 6
+        delay: 5
+  rules:
+    - name: ruleset1_rule1
+      condition: event.i == 1
+      action:
+        run_job_template:
+          name: Hello World
+          organization: Default
+          job_args:
+            extra_vars:
+              hello: Fred
+    - name: ruleset1_rule2
+      condition: event.i == 2
+      action:
+        debug:
+- name: ruleset2
+  hosts: all
+  sources:
+    - name: sourceB
+      ansible.eda.range:
+        limit: 10
+        delay: 10
+  rules:
+    - name: ruleset2_rule1
+      condition: event.i == 4
+      action:
+        run_job_template:
+          name: Hello World
+          organization: Default
+          job_args:
+            extra_vars:
+              hello: Fred
+    - name: ruleset2_rule2
+      condition: event.i == 6
+      action:
+        debug:
