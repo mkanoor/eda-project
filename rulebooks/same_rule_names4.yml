@@ -1,0 +1,16 @@
+---
+- name: ruleset1
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: 6
+  rules:
+    - name: rule1
+      condition: event.i == 1
+      action:
+        debug:
+    - name: rule1
+      condition: event.i == 2
+      action:
+        debug:
