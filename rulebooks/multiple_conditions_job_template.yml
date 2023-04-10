@@ -1,12 +1,12 @@
 ---
-- name: Test run job templates
+- name: Simple rulebook
   hosts: all
   sources:
     - name: my test source
       ansible.eda.range:
         limit: 10
   rules:
-    - name: Run job template
+    - name: Multiple actions rule
       condition: event.i == 1
       actions:
         - run_job_template:
@@ -21,11 +21,11 @@
               - debug message 2
         - print_event:
             pretty: true
-    - name: Debug
+    - name: rule1
       condition: event.i == 2
       action:
         debug:
-    - name: print_event
+    - name: rule2
       condition:
         all: 
           - event.i == 3
@@ -33,13 +33,13 @@
       action:
         print_event:
           pretty: true
-    - name: set_fact
+    - name: rule3
       condition: event.i == 4
       action:
         set_fact:
           fact:
             name: fred
-    - name: retract_fact
+    - name: rule4
       condition: event.message == "Hello, world!"
       action:
         retract_fact:
