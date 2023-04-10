@@ -5,6 +5,7 @@
     - name: my test source
       ansible.eda.range:
         limit: 10
+        delay: 3
   rules:
     - name: Multiple actions rule
       condition: event.i == 1
