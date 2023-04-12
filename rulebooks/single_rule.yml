@@ -17,7 +17,7 @@
               extra_vars:
                 hello: Fred
         - run_job_template:
-            name: Hello, New  World
+            name: Fail
             organization: Default
             job_args:
               extra_vars:
