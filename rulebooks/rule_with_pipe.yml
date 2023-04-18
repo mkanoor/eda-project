@@ -10,7 +10,7 @@
       condition: event.i > 0
       actions:
         - run_job_template:
-            name: Storage Monitor | Remediate
+            name: Storage+Monitor | Reme/diate
             organization: Default
             job_args:
               extra_vars:
