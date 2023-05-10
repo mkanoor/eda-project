@@ -1,0 +1,12 @@
+---
+- name: "Create 100 milliom events"
+  hosts: all
+  sources:
+    - name: range
+      ansible.eda.range:
+        limit: 100000000
+  rules:
+    - name: Rule 
+      condition: event.i is defined
+      action:
+        none:
