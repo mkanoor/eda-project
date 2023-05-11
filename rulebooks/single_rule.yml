@@ -5,6 +5,7 @@
     - name: my test source
       ansible.eda.range:
         limit: 10 
+        delay: 20
   rules:
     - name: myrule1
       condition: event.i > 0
