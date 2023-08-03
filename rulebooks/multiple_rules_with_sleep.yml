@@ -1,0 +1,17 @@
+---
+- name: Test rule multiple firing
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.generic:
+        payload: 
+           - i : 10
+        loop_count: 30
+        loop_delay: 1
+  rules:
+    - name: myrule1
+      condition: event.i > 0
+      actions:
+        - debug:
+            msg: Simple debug message
+        - print_event:
