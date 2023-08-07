@@ -1,0 +1,31 @@
+---
+- name: Key with non alphanumeric characters
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        loop_count: 1
+        timestamp: true
+        create_index: i
+        payload:
+          - message:
+              name: Fred
+          - message:
+              name: Barney
+          - message:
+               नाम: മധു
+  rules:
+    - name: "Square accessor"
+      condition: event.message["नाम"] == "മധു" 
+      action:
+        print_event:
+          pretty: True 
+    - name: English comparison using dot notation
+      condition: event.message.name == "Fred"
+      action:
+         print_event:
+            pretty: True
+    - name: English comparison using square bracket accessor
+      condition: event.message["name"] == "Barney"
+      action:
+         print_event:
+            pretty: True
