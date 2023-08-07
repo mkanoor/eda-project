@@ -1,0 +1,18 @@
+---
+- name: Runs for 10 minutes
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: 21
+        delay: 30
+  rules:
+    - name: rule with 1 action
+      condition: event.i > 0
+      actions:
+        - debug:
+            msg:
+              - debug message 1
+              - debug message 2
+        - print_event:
+            pretty: true
