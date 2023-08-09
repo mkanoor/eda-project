@@ -1,0 +1,13 @@
+---
+- name: Should fail during import
+  hosts: all
+  sources:
+    - name: generic
+      generic:
+        payload:
+          - b: abc : def
+  rules:
+    - name: Test
+      condition: event.b == "abc : def"
+      action:
+        print_event:
