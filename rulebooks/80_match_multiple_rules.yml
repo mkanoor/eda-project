@@ -1,0 +1,17 @@
+---
+- name: match multiple rules
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - name: range
+      range:
+        limit: 5
+  rules:
+    - name: rule1
+      condition: event.i == 1
+      action:
+        debug:
+    - name: rule2
+      condition: event.i == 1
+      action:
+        print_event:
