@@ -5,9 +5,9 @@
     - name: generic
       generic:
         payload:
-          - b: abc : def
+          - b: test
   rules:
     - name: Test
-      condition: event.b == "abc : def"
+      condition: event.b == "test"
       action:
         print_event:
