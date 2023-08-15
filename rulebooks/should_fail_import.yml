@@ -1,7 +1,7 @@
 ---
 - name: Should fail during import
   hosts: all
-  sources:
+  soruces:
     - name: generic
       generic:
         payload:
