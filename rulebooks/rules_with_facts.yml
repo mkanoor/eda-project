@@ -1,0 +1,27 @@
+---
+- name: Test facts firing multiple rules
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.generic:
+        payload: 
+           - i : 1
+        shutdown_after: 2
+  rules:
+    - name: myrule1
+      condition: event.i == 1
+      actions:
+        - set_fact:
+            fact:
+              msg: Hello from facts
+        - print_event:
+    - name: fact_rule1
+      condition: fact.msg == "Hello from facts"
+      actions:
+        - debug:
+            msg: "Fact rule1 fired"
+    - name: fact_rule2
+      condition: fact.msg == "Hello from facts"
+      actions:
+        - debug:
+            msg: "Fact rule2 fired"
