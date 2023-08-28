@@ -11,3 +11,8 @@
       actions:
         - print_event:
             pretty: True
+    - name: mynew_rule2
+      condition: event.i == 1
+      actions:
+        - print_event:
+            pretty: True
