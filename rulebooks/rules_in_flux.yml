@@ -6,13 +6,8 @@
       ansible.eda.range:
         limit: 2 
   rules:
-    - name: mynew_rule1
+    - name: mynew_rule3
       condition: event.i == 0
-      actions:
-        - print_event:
-            pretty: True
-    - name: mynew_rule2
-      condition: event.i == 1
       actions:
         - print_event:
             pretty: True
