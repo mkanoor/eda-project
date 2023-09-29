@@ -1,0 +1,14 @@
+---
+- name: Rules every minute
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: 200000
+        delay: 60
+  rules:
+    - name: Minute rule
+      condition: event.i >= 0
+      actions:
+        - print_event:
+            pretty: True
