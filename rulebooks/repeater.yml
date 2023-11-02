@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - name: range
-      range:
+      ansible.eda.range:
         limit: 500
   rules:
     - name: r1
