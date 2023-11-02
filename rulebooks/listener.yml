@@ -10,7 +10,11 @@
         password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
         channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
   rules:
-    - name: r1
-      condition: event.i >= 3
+    - name: listener ping
+      condition: event.payload.ping == "pong"
       action:
         print_event:
+    - name: listener shutdown
+      condition: event.payload.shutdown is defined
+      action:
+        shutdown:
