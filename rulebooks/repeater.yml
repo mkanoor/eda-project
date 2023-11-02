@@ -4,7 +4,7 @@
   sources:
     - name: range
       ansible.eda.range:
-        limit: 500
+        limit: 5
   rules:
     - name: r1
       condition: "true == true"
