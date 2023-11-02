@@ -5,6 +5,7 @@
   sources:
     - ansible.eda.webhook:
         port: 5555
+        host: 0.0.0.0
   rules:
     - name: Webhook event
       condition: "true == true"
