@@ -1,0 +1,18 @@
+---
+- name: Run a webhook rulebook
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+  rules:
+    - name: Webhook event
+      condition: event.payload.ping is defined
+      action:
+        debug:
+          msg: "Sequence {{event.payload.sequence}}"
+    - name: Shutdown
+      condition: event.payload.shutdown is defined
+      actions:
+        - shutdown:
