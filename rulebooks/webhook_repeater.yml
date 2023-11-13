@@ -1,22 +1,12 @@
 ---
 - name: Run a webhook listener service
   hosts: all
-  match_multiple_rules: true
+  match_multiple_rules: false
   sources:
     - ansible.eda.webhook:
         port: 5555
         host: 0.0.0.0
   rules:
-    - name: Webhook event
-      condition: "true == true"
-      action:
-        pg_notify:
-          dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
-          host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
-          user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
-          password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
-          channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
-          event: "{{ event }}"
     - name: Shutdown
       condition: event.payload.shutdown is defined
       actions:
@@ -28,3 +18,13 @@
               channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
               event: "{{ event }}"
         - shutdown:
+    - name: Webhook event
+      condition: "true == true"
+      action:
+        pg_notify:
+          dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
+          host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
+          user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
+          password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
+          channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+          event: "{{ event }}"
