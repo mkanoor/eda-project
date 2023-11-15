@@ -7,8 +7,9 @@
         blob_size: "{{ BLOB_SIZE }}"
         loop_count: "{{ NUMBER_OF_EVENTS }}"
         payload:
-          - ping: pong
-            manufacturer: Joola
+          - payload:
+               ping: pong
+               manufacturer: Joola
   rules:
     - name: Generic event
       condition: "true == true"
