@@ -1,0 +1,22 @@
+---
+- name: Post events with large blobs
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        create_index: sequence
+        blob_size: "{{ BLOB_SIZE }}"
+        loop_count: "{{ NUMBER_OF_EVENTS }}"
+        payload:
+          - ping: pong
+            manufacturer: Joola
+  rules:
+    - name: Generic event
+      condition: "true == true"
+      action:
+        pg_notify:
+          dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
+          host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
+          user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
+          password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
+          channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+          event: "{{ event }}"
