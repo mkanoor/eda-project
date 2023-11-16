@@ -1,0 +1,12 @@
+---
+- name: Run a webhook source
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        port: "{{ WEBHOOK_PORT }}"
+        host: 0.0.0.0
+  rules:
+    - name: Webhook event
+      condition: "true == true"
+      action:
+        print_event:
