@@ -2,8 +2,8 @@
 - name: Generate a blob
   hosts: all
   sources:
-    - name: ansible.eda.generic
-      generic:
+    - name: Large Hadron Collider
+      ansible.eda.generic:
         payload:
            ping: pong
            truth: true
