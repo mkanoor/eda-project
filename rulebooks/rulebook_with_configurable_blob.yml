@@ -2,12 +2,12 @@
 - name: Generate a blob
   hosts: all
   sources:
-    - name: generic
+    - name: ansible.eda.generic
       generic:
         payload:
            ping: pong
            truth: true
-        loop_count: "{{ LOOP_COUNT }}"
+        loop_count: "{{ NUMBER_OF_EVENTS }}"
         blob_size: "{{ BLOB_SIZE }}"
         create_index: sequence
   rules:
