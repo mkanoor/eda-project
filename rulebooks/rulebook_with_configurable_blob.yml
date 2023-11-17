@@ -1,0 +1,17 @@
+---
+- name: Generate a blob
+  hosts: all
+  sources:
+    - name: generic
+      generic:
+        payload:
+           ping: pong
+           truth: true
+        loop_count: "{{ LOOP_COUNT }}"
+        blob_size: "{{ BLOB_SIZE }}"
+        create_index: sequence
+  rules:
+    - name: r1
+      condition: event.ping == "pong"
+      action:
+        none:
