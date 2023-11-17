@@ -13,8 +13,7 @@
     - name: listener ping
       condition: event.payload.ping == "pong"
       action:
-        debug:
-          msg: "Received message {{ event.payload.sequence }}"
+        none:
     - name: listener shutdown
       condition: event.payload.shutdown is defined
       action:
