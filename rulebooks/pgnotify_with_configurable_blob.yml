@@ -1,0 +1,27 @@
+---
+- name: Generate a blob and send to Postgres
+  hosts: all
+  sources:
+    - name: Large Hadron Collider
+      ansible.eda.generic:
+        payload:
+          - payload:
+               ping: pong
+               truth: true
+        loop_count: "{{ NUMBER_OF_EVENTS }}"
+        blob_size: "{{ BLOB_SIZE }}"
+        create_index: sequence
+        final_payload:
+          payload:
+            shutdown: true
+  rules:
+    - name: send to postgres
+      condition: "true == true"
+      action:
+        pg_notify:
+              dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
+              host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
+              user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
+              password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
+              channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+              event: "{{ event }}"
