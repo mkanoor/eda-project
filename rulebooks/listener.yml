@@ -4,11 +4,11 @@
   sources:
     - name: my_pg_listener
       ansible.eda.pg_listener:
-        dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
-        host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
-        user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
-        password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
-        channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+        dbname: "{{ EDA_NOTIFY_DB_NAME }}"
+        host: "{{ EDA_NOTIFY_DB_HOST }}"
+        user: "{{ EDA_NOTIFY_USER }}"
+        password: "{{ EDA_NOTIFY_PASSWORD }}"
+        channel: "{{ EDA_NOTIFY_CHANNEL }}"
   rules:
     - name: listener ping
       condition: event.payload.ping == "pong"

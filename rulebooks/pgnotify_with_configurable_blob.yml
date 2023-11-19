@@ -2,7 +2,7 @@
 - name: Generate a blob and send to Postgres
   hosts: all
   sources:
-    - name: Large Hadron Collider
+    - name: Large Hadron Source
       ansible.eda.generic:
         payload:
           - payload:
@@ -19,9 +19,9 @@
       condition: "true == true"
       action:
         pg_notify:
-              dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
-              host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
-              user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
-              password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
-              channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+              dbname: "{{ EDA_NOTIFY_DB_NAME }}"
+              host: "{{ EDA_NOTIFY_DB_HOST }}"
+              user: "{{ EDA_NOTIFY_USER }}"
+              password: "{{ EDA_NOTIFY_PASSWORD }}"
+              channel: "{{ EDA_NOTIFY_CHANNEL }}"
               event: "{{ event }}"
