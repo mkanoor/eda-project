@@ -10,9 +10,6 @@
       condition: "true == true"
       action:
         pg_notify:
-          dbname: "{{ 'EDA_NOTIFY_DB_NAME' | getenv }}"
-          host: "{{ 'EDA_NOTIFY_DB_HOST' |getenv }}"
-          user: "{{ 'EDA_NOTIFY_USER' | getenv }}"
-          password: "{{ 'EDA_NOTIFY_PASSWORD' | getenv }}"
-          channel: "{{ 'EDA_NOTIFY_CHANNEL' | getenv }}"
+          dsn: "{{ EDA_NOTIFY_DSN  }}"
+          channel: "{{ EDA_NOTIFY_CHANNEL }}"
           event: "{{ event }}"
