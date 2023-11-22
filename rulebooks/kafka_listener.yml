@@ -1,0 +1,19 @@
+---
+- name: kafka listener
+  hosts: all
+  sources:
+    - name: my_kafka_listener
+      ansible.eda.kafka:
+        host: localhost
+        topic: demo
+        port: 9092
+        offset: latest
+  rules:
+    - name: listener ping
+      condition: event.body.payload.ping == "pong"
+      action:
+        none:
+    - name: listener shutdown
+      condition: event.body.payload.shutdown is defined
+      action:
+        shutdown:

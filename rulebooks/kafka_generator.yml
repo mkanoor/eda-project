@@ -1,0 +1,24 @@
+---
+- name: Post events with large blobs into Kafka
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        create_index: sequence
+        blob_size: 12
+        loop_count: 1000
+        final_payload:
+          payload:
+            shutdown: true
+        payload:
+          - payload:
+               ping: pong
+               manufacturer: Joola
+  rules:
+    - name: Generic event
+      condition: true
+      action:
+        kafka_notify:
+          topic: demo
+          event: "{{ event }}"
+          connection:
+            bootstrap_servers: localhost
