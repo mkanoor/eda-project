@@ -4,8 +4,8 @@
   sources:
     - name: my_kafka_listener
       ansible.eda.kafka:
-        host: localhost
-        topic: demo
+        host: "{{ MY_KAFKA_HOST | default('localhost') }}"
+        topic: "{{ MY_KAFKA_TOPIC | default('demo') }}"
         port: 9092
         offset: latest
   rules:

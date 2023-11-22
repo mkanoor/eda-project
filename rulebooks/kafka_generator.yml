@@ -18,7 +18,7 @@
       condition: true
       action:
         kafka_notify:
-          topic: demo
+          topic: "{{ MY_KAFKA_TOPIC | default('demo') }}"
           event: "{{ event }}"
           connection:
-            bootstrap_servers: localhost
+            bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
