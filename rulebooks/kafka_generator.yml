@@ -4,8 +4,8 @@
   sources:
     - ansible.eda.generic:
         create_index: sequence
-        blob_size: 12
-        loop_count: 1000
+        blob_size: "{{ BLOB_SIZE | default(32) }}"
+        loop_count: "{{ NUMBER_OF_EVENTS | default(8) }}"
         final_payload:
           payload:
             shutdown: true
