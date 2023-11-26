@@ -1,0 +1,68 @@
+---
+- name: Write events to different channels based on color
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        create_index: sequence
+        blob_size: "{{ BLOB_SIZE | default(32) }}"
+        loop_count: "{{ NUMBER_OF_EVENTS | default(8) }}"
+        final_payload:
+          payload:
+            shutdown: true
+        payload:
+          - payload:
+               ping: pong
+               manufacturer: Joola
+               color: red
+          - payload:
+               ping: pong
+               manufacturer: Kettler
+               color: blue
+          - payload:
+               ping: pong
+               manufacturer: Stiga
+               color: green
+
+  rules:
+    - name: Red Event
+      condition: event.payload.color == "red"
+      action:
+        kafka_notify:
+          topic: "{{ MY_KAFKA_RED_TOPIC | default('red') }}"
+          event: "{{ event }}"
+          connection:
+            bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
+    - name: Blue Event
+      condition: event.payload.color == "blue"
+      action:
+        kafka_notify:
+          topic: "{{ MY_KAFKA_BLUE_TOPIC | default('blue') }}"
+          event: "{{ event }}"
+          connection:
+            bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
+    - name: Green Event
+      condition: event.payload.color == "green"
+      action:
+        kafka_notify:
+          topic: "{{ MY_KAFKA_GREEN_TOPIC | default('green') }}"
+          event: "{{ event }}"
+          connection:
+            bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
+    - name: Shutdown Event
+      condition: event.payload.shutdown
+      actions:
+        - kafka_notify:
+            topic: "{{ MY_KAFKA_RED_TOPIC | default('red') }}"
+            event: "{{ event }}"
+            connection:
+              bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
+        - kafka_notify:
+            topic: "{{ MY_KAFKA_BLUE_TOPIC | default('blue') }}"
+            event: "{{ event }}"
+            connection:
+              bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
+        - kafka_notify:
+            topic: "{{ MY_KAFKA_GREEN_TOPIC | default('green') }}"
+            event: "{{ event }}"
+            connection:
+              bootstrap_servers: "{{ MY_KAFKA_HOST | default('localhost') }}"
