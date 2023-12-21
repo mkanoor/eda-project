@@ -1,0 +1,23 @@
+---
+- name: Barneys webhook rulebook
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - ansible.eda.webhook:
+        port: 6666
+        host: 0.0.0.0
+  rules:
+    - name: Barneys's rule
+      condition: event.payload.name == "Barney"
+      action:
+        print_event:
+    - name: Broadcast 
+      condition: event.payload.broadcast
+      action:
+        debug:
+          msg: "PSA {event.payload.message}"
+    - name: Shutdown
+      condition: event.payload.shutdown and event.payload.name == "Barney"
+      action:
+        debug:
+          msg: "Shutting down activation Barneys"

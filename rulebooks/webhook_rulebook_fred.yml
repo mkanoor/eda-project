@@ -1,0 +1,23 @@
+---
+- name: Freds webhook rulebook
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - ansible.eda.webhook:
+        port: 4444
+        host: 0.0.0.0
+  rules:
+    - name: Fred's rule
+      condition: event.payload.name == "Fred"
+      action:
+        print_event:
+    - name: Broadcast
+      condition: event.payload.broadcast
+      action:
+        debug:
+          msg: "PSA {event.payload.message}"
+    - name: Shutdown
+      condition: event.payload.shutdown
+      action:
+        debug:
+          msg: "Shutting down Fred's activation"
