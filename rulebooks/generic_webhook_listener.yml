@@ -1,0 +1,13 @@
+---
+- name: Generic webhook listener
+  hosts: all
+  sources:
+    - name: my_pg_listener
+      ansible.eda.pg_listener:
+        dsn: "{{ EDA_PG_NOTIFY_DSN }}"
+        channels: "{{ EDA_WEBHOOK_CHANNELS }}"
+  rules:
+    - name: webhook data
+      condition: true
+      action:
+        print_event:
