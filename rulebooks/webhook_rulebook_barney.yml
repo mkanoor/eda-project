@@ -15,7 +15,7 @@
       condition: event.payload.broadcast
       action:
         debug:
-          msg: "PSA {event.payload.message}"
+          msg: "PSA ({ event.payload.message }}"
     - name: Shutdown
       condition: event.payload.shutdown and event.payload.name == "Barney"
       action:
