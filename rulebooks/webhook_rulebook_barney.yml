@@ -19,5 +19,5 @@
     - name: Shutdown
       condition: event.payload.shutdown and event.payload.name == "Barney"
       action:
-        debug:
-          msg: "Shutting down activation Barneys"
+        shutdown:
+          message: "Shutting down activation Barneys"

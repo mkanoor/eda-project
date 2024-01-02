@@ -19,5 +19,5 @@
     - name: Shutdown
       condition: event.payload.shutdown
       action:
-        debug:
-          msg: "Shutting down Fred's activation"
+        shutdown:
+          message: "Shutting down Fred's activation"
