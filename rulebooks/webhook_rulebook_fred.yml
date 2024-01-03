@@ -17,7 +17,7 @@
         debug:
           msg: "PSA ({ event.payload.message }}"
     - name: Shutdown
-      condition: event.payload.shutdown
+      condition: event.payload.shutdown and event.payload.name == "Fred"
       action:
         shutdown:
           message: "Shutting down Fred's activation"
