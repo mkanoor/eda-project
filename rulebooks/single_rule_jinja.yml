@@ -1,0 +1,15 @@
+---
+- name: Test rule firing
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: "{{ enc_limit }}"
+        delay: 20
+  rules:
+    - name: myrule1
+      condition: event.i > 0
+      actions:
+        - debug:
+            msg: Simple debug message
+        - print_event:
