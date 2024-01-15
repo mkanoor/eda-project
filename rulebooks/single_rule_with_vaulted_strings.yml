@@ -1,0 +1,21 @@
+---
+- name: Test rule firing with embedded vaulted string
+  hosts: all
+  sources:
+    - name: my test source
+      ansible.eda.range:
+        limit: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35376533653334653533336133396539386430616134643435623565306365366338366631653461
+          6466333965356232333638353136376662613764356333320a343437376562333764396635303530
+          37623764306431613664376431663936373230643133366530323239316131363563613730633961
+          3963313765646434630a636566626539386131653966636637303839313739643132386565343262
+          3332
+        delay: 20
+  rules:
+    - name: myrule1
+      condition: event.i > 0
+      actions:
+        - debug:
+            msg: Simple debug message
+        - print_event:
