@@ -1,0 +1,15 @@
+---
+- name: Vault Demo
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        payload:
+          - connect:
+               host: "{{ db_host }}"
+               password: "{{ db_password }}"
+  rules:
+    - name: Check DB Host and password
+      condition: event.connect.host == "localhost" and event.connect.password == "password"
+      action:
+        debug:
+          msg: "Password and host match"
