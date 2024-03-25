@@ -6,7 +6,7 @@
       ansible.eda.missing:
         limit: 5
   rules:
-    - name: "Debug"
+    - name: Debug
       condition: event.i == 1
       action:
         debug:
