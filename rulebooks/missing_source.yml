@@ -6,12 +6,7 @@
       ansible.eda.missing:
         limit: 5
   rules:
-    - name: "Run job template"
+    - name: "Debug"
       condition: event.i == 1
       action:
-        run_job_template:
-          name: Fail
-          organization: Default
-          job_args:
-            extra_vars:
-              hello: Fred
+        debug:
