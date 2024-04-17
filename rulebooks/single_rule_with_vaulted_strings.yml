@@ -4,6 +4,8 @@
   sources:
     - name: my test source
       ansible.eda.range:
+        # vault password: secret
+        # the value of limit is 5
         limit: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           61343164616161376234396238376130303138323439643734386230666130343431623330383935
@@ -11,7 +13,7 @@
           65643365363632313662353861343761633464666431626235643761666436613239386231353164
           3733363137646362630a653735346638643131653263663333356164343135633933653362646138
           6131
-        delay: 20
+        delay: 1
   rules:
     - name: myrule1
       condition: event.i > 0
