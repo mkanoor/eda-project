@@ -1,0 +1,16 @@
+---
+- name: Amazon SQS Rulebook
+  hosts: all
+  sources:
+    - ansible.eda.aws_sqs_queue:
+        name: "{{ queue_name }}"
+        url: "{{ queue_url }}"
+        delay_seconds: 10
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
+        region: "{{ region }}"
+  rules:
+    - name: SQS event
+      condition: true
+      action:
+        debug:
