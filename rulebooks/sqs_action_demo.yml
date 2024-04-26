@@ -1,0 +1,32 @@
+---
+- name: EC2 SQS Rulebook with Actions
+  hosts: all
+  sources:
+    - ansible.eda.aws_sqs_queue:
+        name: "{{ queue_name }}"
+        url: "{{ queue_url }}"
+        delay_seconds: 10
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
+        region: "{{ region }}"
+  rules:
+    - name: Debug Action from SQS
+      condition: event.body.action == "debug"
+      action:
+        debug:
+    - name: Print Action from SQS
+      condition: event.body.action == "print_event"
+      action:
+        print_event:
+    - name: Job Template Action from SQS
+      condition: event.body.action == "run_job_template"
+      action:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
+          job_args:
+            extra_vars:
+              hello: Fred
+          retries: 1
+          delay: 10
+          set_facts: True
