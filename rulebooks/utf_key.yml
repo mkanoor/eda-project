@@ -1,5 +1,5 @@
 ---
-- name: Key with non alphanumeric characters in conditions
+- name: Key with non alphanumeric characters in conditions-1
   hosts: all
   sources:
     - ansible.eda.generic:
