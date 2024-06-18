@@ -1,0 +1,23 @@
+---
+- name: Webhook rulebook with different filter
+  hosts: all
+  sources:
+    - name: my_github 
+      ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+      filters: 
+        - ansible.eda.json_filter:
+           include_keys:
+             - sender
+             - login
+             - id
+             - node_id
+             - site_admin
+           exclude_keys:
+             - '*'
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        debug:
