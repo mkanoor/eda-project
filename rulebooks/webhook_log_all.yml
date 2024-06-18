@@ -9,7 +9,12 @@
       filters: 
         - ansible.eda.json_filter:
            include_keys:
+             - repository
+             - name
+             - full_name
              - url
+             - sender
+             - login
              - login
              - zen
            exclude_keys:
