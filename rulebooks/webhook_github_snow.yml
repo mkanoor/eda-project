@@ -6,6 +6,16 @@
       ansible.eda.webhook:
         port: 5555
         host: 0.0.0.0
+      filters: 
+        - ansible.eda.json_filter:
+           include_keys:
+             - approval
+             - sys_class_name
+             - sys_created_by
+             - category
+             - urgency
+           exclude_keys:
+             - '*'
     - name: my_github 
       ansible.eda.webhook:
         port: 5555
