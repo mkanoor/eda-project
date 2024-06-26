@@ -9,6 +9,7 @@
       filters: 
         - ansible.eda.json_filter:
            include_keys:
+             - payload
              - approval
              - sys_class_name
              - sys_created_by
@@ -23,6 +24,7 @@
       filters: 
         - ansible.eda.json_filter:
            include_keys:
+             - payload
              - repository
              - name
              - full_name
