@@ -1,0 +1,11 @@
+---
+- name: Use payload file to check events
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        payload_file: "{{ eda.template.test_payload_file }}"
+  rules:
+    - name: Compare event
+      condition: true
+      action:
+        debug:
