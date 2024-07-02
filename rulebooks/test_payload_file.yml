@@ -5,7 +5,15 @@
     - ansible.eda.generic:
         payload_file: "{{ eda.template.test_payload_file }}"
   rules:
-    - name: Compare event
-      condition: true
+    - name: Fred Flintstone
+      condition: event.name == "Fred Flintstone"
+      action:
+        debug:
+    - name: Wilma Flintstone
+      condition: event.name == "Wilma Flintstone"
+      action:
+        debug:
+    - name: Barney Rubble
+      condition: event.name == "Barney Rubble"
       action:
         debug:
