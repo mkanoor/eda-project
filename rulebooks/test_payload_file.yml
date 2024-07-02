@@ -5,15 +5,15 @@
     - ansible.eda.generic:
         payload_file: "{{ eda.template.test_payload_file }}"
   rules:
-    - name: Fred Flintstone
-      condition: event.name == "Fred Flintstone"
+    - name: "{{ friend1 }} rule"
+      condition: event.name == vars.friend1
       action:
         debug:
-    - name: Wilma Flintstone
-      condition: event.name == "Wilma Flintstone"
+    - name: "{{ friend2 }} rule"
+      condition: event.name == vars.friend2
       action:
         debug:
-    - name: Barney Rubble
-      condition: event.name == "Barney Rubble"
+    - name: "{{ friend3 }} rule"
+      condition: event.name == vars.friend3
       action:
         debug:
