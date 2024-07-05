@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.generic:
-        payload_file: "{{ eda.template.test_payload_file }}"
+        payload_file: "{{ eda.filename.test_payload_file }}"
   rules:
     - name: Rule1
       condition: event.name == vars.friend1
