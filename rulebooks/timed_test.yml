@@ -4,8 +4,8 @@
   sources:
     - name: my test source
       ansible.eda.range:
-        limit: "{{ limit| 20 }}"
-        delay: "{{ delay| 30 }}"
+        limit: "{{ limit | default('20') }}"
+        delay: "{{ delay | default('30') }}"
   rules:
     - name: rule with 1 action
       condition: event.i > 0
