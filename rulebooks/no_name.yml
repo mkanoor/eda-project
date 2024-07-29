@@ -8,6 +8,7 @@
       filters: 
         - ansible.eda.json_filter:
            include_keys:
+             - payload
              - repository
              - name
              - full_name
