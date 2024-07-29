@@ -1,0 +1,25 @@
+---
+- name: Where the source have no names
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+      filters: 
+        - ansible.eda.json_filter:
+           include_keys:
+             - repository
+             - name
+             - full_name
+             - url
+             - sender
+             - login
+             - login
+             - zen
+           exclude_keys:
+             - '*'
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        debug:
