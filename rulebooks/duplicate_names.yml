@@ -1,0 +1,42 @@
+---
+- name: Rulebook with duplicate names
+  hosts: all
+  sources:
+    - name: my_source 
+      ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+      filters: 
+        - ansible.eda.json_filter:
+           include_keys:
+             - payload
+             - approval
+             - sys_class_name
+             - sys_created_by
+             - category
+             - urgency
+           exclude_keys:
+             - '*'
+    - name: my_source 
+      ansible.eda.webhook:
+        port: 5556
+        host: 0.0.0.0
+      filters: 
+        - ansible.eda.json_filter:
+           include_keys:
+             - payload
+             - repository
+             - name
+             - full_name
+             - url
+             - sender
+             - login
+             - login
+             - zen
+           exclude_keys:
+             - '*'
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        debug:
