@@ -1,0 +1,27 @@
+---
+- name: Wilmas webhook rulebook with HMAC
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - ansible.eda.webhook:
+        port: 6666
+        host: 0.0.0.0
+        hmac_secret: "{{ hmac_secret }}"
+        hmac_algo: "{{ hmac_algo     | default('sha256') }}"
+        hmac_header: "{{ hmac_header   | default('x-hub-signature-256') }}"
+        hmac_format: "{{ hmac_format   | default('hex') }}"
+  rules:
+    - name: Wilma's rule
+      condition: event.payload.name == "Wilma"
+      action:
+        print_event:
+    - name: Broadcast in wilmas rulebook
+      condition: event.payload.broadcast
+      action:
+        debug:
+          msg: "PSA ({ event.payload.message }}"
+    - name: Shutdown
+      condition: event.payload.shutdown and event.payload.name == "Wilma"
+      action:
+        shutdown:
+          message: "Shutting down Wilma's activation"
