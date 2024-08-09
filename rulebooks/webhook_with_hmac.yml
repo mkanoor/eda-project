@@ -1,7 +1,6 @@
 ---
 - name: Wilmas webhook rulebook with HMAC
   hosts: all
-  match_multiple_rules: true
   sources:
     - ansible.eda.webhook:
         port: 6666
