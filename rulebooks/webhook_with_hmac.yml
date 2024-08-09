@@ -14,7 +14,7 @@
     - name: Wilma's rule
       condition: event.payload.name == "Wilma"
       action:
-        print_event:
+        none:
     - name: Broadcast in wilmas rulebook
       condition: event.payload.broadcast
       action:
