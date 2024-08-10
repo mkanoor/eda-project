@@ -7,6 +7,11 @@
         host: 0.0.0.0
         token: "{{ webhook_token }}"
   rules:
+    - name: Shutdown
+      condition: event.payload.shutdown
+      action:
+        shutdown:
+          message: "Shutting down activation"
     - name: Wilma's rule
       condition: event.payload.name == "Wilma"
       action:
@@ -16,8 +21,3 @@
       action:
         debug:
           msg: "PSA ({ event.payload.message }}"
-    - name: Shutdown
-      condition: event.payload.shutdown and event.payload.name == "Wilma"
-      action:
-        shutdown:
-          message: "Shutting down Wilma's activation"
