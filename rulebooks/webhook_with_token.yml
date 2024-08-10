@@ -1,5 +1,5 @@
 ---
-- name: Wilmas webhook rulebook
+- name: Wilmas webhook rulebook with Token
   hosts: all
   sources:
     - ansible.eda.webhook:
