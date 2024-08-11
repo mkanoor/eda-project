@@ -1,0 +1,46 @@
+---
+- name: Webhook rulebook with HMAC and other sources no filters
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        event_delay: 60
+        payload:
+          - i : 1
+          - i : 2
+          - i : 3
+    - ansible.eda.webhook:
+        port: 6666
+        host: 0.0.0.0
+        hmac_secret: "{{ hmac_secret }}"
+        hmac_algo: "{{ hmac_algo     | default('sha256') }}"
+        hmac_header: "{{ hmac_header   | default('x-hub-signature-256') }}"
+        hmac_format: "{{ hmac_format   | default('hex') }}"
+    - ansible.eda.generic:
+        event_delay: 90
+        payload:
+          - name : Fred
+          - name : Barney
+
+  rules:
+    - name: Shutdown
+      condition: event.payload.shutdown
+      action:
+        shutdown:
+          message: "Shutting down activation"
+    - name: Fred's rule
+      condition: event.name == 'Fred'
+      action:
+        debug:
+    - name: Check i is 1
+      condition: event.i == 1
+      action:
+        print_event:
+    - name: Wilma's rule
+      condition: event.payload.name == "Wilma"
+      action:
+        none:
+    - name: Broadcast 
+      condition: event.payload.broadcast
+      action:
+        debug:
+          msg: "PSA ({ event.payload.message }}"
