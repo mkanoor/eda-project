@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.generic:
-        loop_delay: 60
+        event_delay: 60
         payload:
           - i : 1
           - i : 2
@@ -25,7 +25,7 @@
            exclude_keys:
              - '*'
     - ansible.eda.generic:
-        loop_delay: 90
+        event_delay: 90
         payload:
           - name : Fred
           - name : Barney
