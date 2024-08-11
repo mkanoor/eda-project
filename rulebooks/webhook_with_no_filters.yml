@@ -27,6 +27,7 @@
       action:
         shutdown:
           message: "Shutting down activation"
+          delay: 1
     - name: Fred's rule
       condition: event.name == 'Fred'
       action:
