@@ -1,0 +1,13 @@
+---
+- name: Webhook with github
+  hosts: all
+  sources:
+    - name: my_github 
+      ansible.eda.webhook:
+        port: 5556
+        host: 0.0.0.0
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        debug:
