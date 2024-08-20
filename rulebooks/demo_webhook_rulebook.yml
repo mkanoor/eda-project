@@ -19,5 +19,5 @@
     - name: Webhook rule
       condition: true
       action:
-        debug:
+        print_event:
 ...
