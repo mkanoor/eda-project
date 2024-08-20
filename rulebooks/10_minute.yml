@@ -12,3 +12,4 @@
       actions:
         - print_event:
             pretty: true
+        - debug:
