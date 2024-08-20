@@ -10,4 +10,4 @@
     - name: Webhook event
       condition: true
       action:
-        debug:
+        print_event:
