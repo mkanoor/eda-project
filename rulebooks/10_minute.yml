@@ -10,9 +10,5 @@
     - name: rule with 1 action
       condition: event.i > 0
       actions:
-        - debug:
-            msg:
-              - debug message 1
-              - debug message 2
         - print_event:
             pretty: true
