@@ -8,7 +8,7 @@
         port: 5000
   rules:
     - name: server down
-      condition: event.payload.alert.labels.job == "server" and event.payload.alert.status == "firing"
+      condition: event.payload.alerts[0].labels.job == "kube-state-metrics" and event.payload.alerts[0].status == "firing"
       action:
         run_job_template:
           organization: Default
