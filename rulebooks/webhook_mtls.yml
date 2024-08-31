@@ -4,10 +4,10 @@
   sources:
     - ansible.eda.webhook:
         port: "{{ port | default('5555') }}"
-        host: 0.0.0.0
-        certfile: "{{ eda.filename.certfile }}"
-        keyfile:  "{{ eda.filename.keyfile }}"
-        cafile: "{{ eda.filename.cafile }}"
+        certfile: "{{ eda.filename.certfile | default(None) }}"
+        keyfile:  "{{ eda.filename.keyfile | default(None) }}"
+        password: "{{ key_password | default(None) }}"
+        cafile: "{{ eda.filename.cafile | default(None) }}"
   rules:
     - name: log all
       condition: true
