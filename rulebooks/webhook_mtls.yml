@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.webhook:
-        port: 5555
+        port: "{{ port | default('5555') }}"
         host: 0.0.0.0
         certfile: "{{ eda.filename.certfile }}"
         keyfile:  "{{ eda.filename.keyfile }}"
