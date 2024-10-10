@@ -5,7 +5,7 @@
     - ansible.eda.generic:
          event_delay: 5
          loop_delay: 10
-         loop_count: 25
+         loop_count: "{{ times | default(10) | int }}"
          payload:
            - i: 1
            - j: 1
