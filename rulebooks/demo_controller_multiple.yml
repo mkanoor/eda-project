@@ -1,0 +1,26 @@
+---
+- name: Controller Demo
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+         event_delay: 5
+         loop_delay: 10
+         loop_count: 25
+         payload:
+           - i: 1
+           - j: 1
+
+  rules:
+    - name: Controller Rule
+      condition: event.i == 1
+      action:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
+    - name: Missing Job Template Rule
+      condition: event.j == 1
+      action:
+        run_job_template:
+          name: Demo Template
+          organization: Default
+...
