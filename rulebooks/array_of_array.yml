@@ -1,0 +1,78 @@
+---
+- name: Test ruleset
+  hosts: localhost
+  sources:
+    - ansible.eda.generic:
+        payload:
+          - incident:
+              id: 671561b1831671506180bea5
+              active: false
+              alerts:
+                - id: 67156085c048f04e514bdd4d
+                  tags:
+                    - name: alertname
+                      value: MariadbDown
+                    - name: state
+                      value: active
+                    - name: instance
+                      value: adam-db1
+                    - name: severity
+                      value: critical
+                    - name: summary
+                      value: Endpoint adam-db1 down
+                    - name: alert_type
+                      value: service
+                    - name: host_name
+                      value: adam-db1
+                    - name: job
+                      value: node-exporter
+                    - name: hostname
+                      value: adam-db1
+                    - name: name
+                      value: mariadb.service
+                  status: Ok
+                  description: 'Service Down: adam-db1 of job node-exporter has been down for more than 1 minutes.'
+                  sourceSystem: prometheus.amack_prometheus
+                  primaryProperty: instance
+                  secondaryProperty: alertname
+                - id: 671561b1831671506180bea5
+                  tags:
+                    - name: bp_secondary_property
+                      value: adam-web1
+                    - name: summary
+                      value: Endpoint adam-web1 down
+                    - name: fstype
+                      value: xfs
+                    - name: severity
+                      value: critical
+                    - name: instance
+                      value: adam-web1
+                    - name: host_name
+                      value: adam-web1
+                    - name: alert_type
+                      value: disk_usage
+                    - name: alert_updates
+                      value: 2
+                    - name: bp_primary_property
+                      value: disk
+                    - name: mountpoint
+                      value: "/"
+                    - name: job
+                      value: node-exporter
+                    - name: device
+                      value: "/dev/mapper/rhel-root"
+                    - name: hostname
+                      value: adam-web1
+                    - name: alertname
+                      value: DiskUsage
+                  status: Ok
+                  description: 'Disk Usage: adam-web1 of job node-exporter has a disk usage past the threshold.'
+                  sourceSystem: prometheus.amack_prometheus
+                  primaryProperty: instance
+                  secondaryProperty: alertname
+  rules:
+    - name: r1
+      condition: event.incident.alerts.tags is selectattr('value', '==', 'DiskUsage')
+      action:
+        debug:
+          msg: Found a match with alerts
