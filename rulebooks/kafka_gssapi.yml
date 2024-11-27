@@ -1,0 +1,21 @@
+---
+- name: kafka listener
+  hosts: all
+  sources:
+    - name: my_gssapi)kafka
+      ansible.eda.kafka:
+        host: "{{ host | default('localhost') }}"
+        port: "{{ port | default('9092') }}"
+        encoding: "{{ encoding | default('utf-8') }}"
+        topic: "{{ topic | default('demo') }}"
+        group_id: "{{ group_id | default(None) }}"
+        offset: "{{ offset | default('latest') }}"
+        security_protocol: "{{ security_protocol | default('PLAINTEXT') }}"
+        sasl_mechanism: "{{ sasl_mechanism | default('PLAIN') }}"
+        sasl_kerberos_service_name: "{{ sasl_kerberos_service_name | default(None) }}"
+        sasl_kerberos_domain_name: "{{ sasl_kerberos_domain_name | default(None) }}"
+  rules:
+    - name: log all
+      condition: true
+      action:
+        debug:
