@@ -2,7 +2,7 @@
 - name: kafka listener
   hosts: all
   sources:
-    - name: my_gssapi)kafka
+    - name: my_gssapi_kafka
       ansible.eda.kafka:
         host: "{{ host | default('localhost') }}"
         port: "{{ port | default('9092') }}"
