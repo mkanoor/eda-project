@@ -1,0 +1,125 @@
+---
+- name: Listen for events from Gitea on a webhook
+  hosts: all
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5099
+
+  rules:
+    - name: Start the Configure AAP Job Template
+      condition: |
+        event.payload.repository.name == "aap_config"
+      throttle:
+        once_within: 10 minutes
+        group_by_attributes:
+          - event.payload.head_commit.id
+      action:
+        run_job_template:
+          name: "Configure AAP"
+          organization: "ThuisNet"
+
+    - name: Start the Configure EDA Job Template for eda_config
+      condition: |
+        event.payload.repository.name == "eda_config"
+      action:
+        run_job_template:
+          name: "Configure EDA"
+          organization: "ThuisNet"
+
+    - name: Start the Configure EDA Job Template for eda_rules
+      condition: |
+        event.payload.repository.name == "eda_rules"
+      action:
+        run_job_template:
+          name: "Update EDA Activations"
+          organization: "ThuisNet"
+
+    - name: Start the Configure Hub Job Template
+      condition: |
+        event.payload.repository.name == "hub_config"
+      action:
+        run_job_template:
+          name: "Configure Hub"
+          organization: "ThuisNet"
+
+    - name: Start the Alloy Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'alloy.yml')
+      action:
+        run_job_template:
+          name: "Alloy Configuration"
+          organization: "ThuisNet"
+
+    - name: Start the Caddy Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'caddy.yml')
+      action:
+        run_job_template:
+          name: "Configure Caddy"
+          organization: "ThuisNet"
+
+    - name: Start the Cockpit Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'cockpit.yml')
+      action:
+        run_job_template:
+          name: "Configure Cockpit"
+          organization: "ThuisNet"
+
+    - name: Start the packages Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'packages')
+      action:
+        run_job_template:
+          name: "Install Packages"
+          organization: "ThuisNet"
+
+    - name: Start the PostgreSQL Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'postgresql')
+      action:
+        run_job_template:
+          name: "PostgreSQL 15 Configuration"
+          organization: "ThuisNet"
+
+    - name: Start the Sudo Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'sudo.yml')
+      action:
+        run_job_template:
+          name: "Sudo"
+          organization: "ThuisNet"
+
+    - name: Start the User Management Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'user_management.yml')
+      action:
+        run_job_template:
+          name: "User Management"
+          organization: "ThuisNet"
+
+    - name: Start the Time and Timezone Job Template
+      condition: |
+        event.payload.repository.name == "ansible_berries" and
+        event.payload.commits is selectattr('modified', 'search', 'time.yml')
+      action:
+        run_job_template:
+          name: "Time and Timezone"
+          organization: "ThuisNet"
+
+    - name: Event missed everything
+      condition: true
+      action:
+        debug:
+          msg:
+            - "Missed everthing"
+            - "{{ event }}"
