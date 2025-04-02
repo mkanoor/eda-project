@@ -3,9 +3,14 @@
   hosts: all
   sources:
     - name: my test source
-      ansible.eda.range:
-        limit: "{{ limit | default('20') }}"
-        delay: "{{ delay | default('30') }}"
+      ansible.eda.generic:
+        loop_count: "{{ loop_count | default('20') }}"
+        loop_delay: "{{ loop_delay | default('30') }}"
+        startup_delay: "{{ startup_delay | default('0') }}"
+        create_index: i
+        blob_size: "{{ blob_size | default('10') }}"
+        payload:
+          - name: Fred
   rules:
     - name: rule with 1 action
       condition: event.i > 0
