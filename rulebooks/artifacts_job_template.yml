@@ -11,12 +11,12 @@
       condition: event.i == 1
       action:
         run_job_template:
-          name: artifacts example
+          name: "{{ job_template_name | default('Demo Job Template') }}"
           organization: Default
           job_args:
             extra_vars:
               hello: Fred
-          set_facts: True
+          post_events: True
     - name: Reacting to output from job
       condition: event.expose_to_cloud_redhat_com_person.name == "Fred Flintstone"
       action:
