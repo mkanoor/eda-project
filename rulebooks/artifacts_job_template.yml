@@ -8,7 +8,7 @@
         delay: "{{delay | default('30') }}"
   rules:
     - name: Run job template
-      condition: event.i == 1
+      condition: event.i == 0
       action:
         run_job_template:
           name: "{{ job_template_name | default('Demo Job Template') }}"

@@ -8,7 +8,7 @@
         delay: "{{delay | default('30') }}"
   rules:
     - name: Run workflow 
-      condition: event.i == 1
+      condition: event.i == 0
       action:
         run_workflow_template:
           name: "{{ workflow_template_name }}"
