@@ -1,0 +1,22 @@
+---
+# This playbook prints a simple debug message and set_stats
+- name: Echo Hello, world!
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+  - debug: msg="Hello, world!"
+  - set_stats:
+      data:
+        my_date: "{{ ansible_date_time.date }}"
+        my_time: "{{ ansible_date_time.time }}"
+        my_var: 1
+        expose_to_cloud_redhat_com_friend: 'Barney Rubble'
+        expose_to_cloud_redhat_com_person:
+          name: 'Fred Flintstone'
+          age: 45
+          city: 'Bedrock'
+          catchphrase: 'Yabba Dabba Doo'
+        expose_to_cloud_redhat_com_ips:
+          - 1.1.1.94
+          - 1.1.1.93
+          - 1.1.1.97
