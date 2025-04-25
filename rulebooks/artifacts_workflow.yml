@@ -1,5 +1,5 @@
 ---
-- name: Get artifacts from job template
+- name: Get artifacts from workflow
   hosts: all
   sources:
     - name: my test source
@@ -7,11 +7,11 @@
         limit: "{{number_of_events |default('10') }}"
         delay: "{{delay | default('30') }}"
   rules:
-    - name: Run job template
+    - name: Run workflow 
       condition: event.i == 1
       action:
-        run_job_template:
-          name: "{{ job_template_name | default('Demo Job Template') }}"
+        run_workflow_template:
+          name: "{{ workflow_template_name }}"
           organization: Default
           job_args:
             extra_vars:
