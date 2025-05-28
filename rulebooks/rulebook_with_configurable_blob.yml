@@ -7,9 +7,9 @@
         payload:
            ping: pong
            truth: true
-        loop_count: "{{ NUMBER_OF_EVENTS | 1000 }}"
-        blob_size: "{{ BLOB_SIZE | 1024 }}"
-        loop_delay: "{{ DELAY | 5 }}"
+        loop_count: "{{ NUMBER_OF_EVENTS | default(1000) }}"
+        blob_size: "{{ BLOB_SIZE | default(1024) }}"
+        loop_delay: "{{ DELAY | default(5) }}"
         create_index: sequence
   rules:
     - name: r1
