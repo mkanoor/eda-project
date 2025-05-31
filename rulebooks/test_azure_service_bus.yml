@@ -1,0 +1,13 @@
+---
+- name: Get Events from Azure Service Bus
+  hosts: all
+  sources:
+    - name: AZ Bus
+      ansible.eda.azure_service_bus:
+        conn_str: "{{ conn_str }}"
+        queue_name: "{{ queue_name }}"
+  rules:
+    - name: r1
+      condition: true
+      action:
+        print_event:
