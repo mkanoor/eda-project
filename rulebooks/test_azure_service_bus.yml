@@ -8,6 +8,6 @@
         queue_name: "{{ queue_name }}"
   rules:
     - name: r1
-      condition: true
+      condition: event.body.name == "Fred Flintstone"
       action:
         print_event:
