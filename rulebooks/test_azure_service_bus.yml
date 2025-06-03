@@ -1,6 +1,7 @@
 ---
 - name: Get Events from Azure Service Bus
   hosts: all
+  gather_facts: true
   sources:
     - name: AZ Bus
       ansible.eda.azure_service_bus:
