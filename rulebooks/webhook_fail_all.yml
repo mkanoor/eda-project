@@ -1,0 +1,13 @@
+---
+- name: Match ado about nothing
+  hosts: all
+  sources:
+    - name: my_source 
+      ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+  rules:
+    - name: Webhook event
+      condition: false
+      action:
+        debug:
