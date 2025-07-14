@@ -11,6 +11,6 @@
              splitter_key: payload.alerts
   rules:
     - name: Alert manager event
-      condition: true
+      condition: event.labels.severity == "critical" and event.labels.alertname == "HostUp"
       action:
         debug:
