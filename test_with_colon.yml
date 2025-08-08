@@ -1,0 +1,21 @@
+---
+- name: colon in condition
+  hosts: localhost
+  sources:
+    - ansible.eda.generic:
+        payload:
+                - name: 'Fred: Flintstone'
+                  age: 50
+                  profession: Crane Operator
+                - name: Barney Rubble
+                  age: 45
+  rules:
+    - name: r1
+      condition: >
+        event.name == 'Fred: Flintstone' and event.profession == "Crane Operator"
+      action:
+        debug:
+    - name: r2
+      condition: event.name == "Barney Rubble"
+      action:
+        debug:
