@@ -1,0 +1,33 @@
+---
+- name: accumulate within
+  hosts: localhost
+  sources:
+    - name: Test
+      ansible.eda.generic:
+        payload:
+          - name: alert1
+            level: error
+            code: 205
+          - name: alert2
+            level: warning
+            code: 207
+          - name: alert4
+            level: error
+            code: 209
+        loop_count: 100
+        create_index: index
+        timestamp: true
+        shutdown_delay: 60
+  rules:
+    - name: r1
+      condition: event.level == 'error'
+      throttle:
+          accumulate_within: 1 minutes
+          threshold: 100
+          group_by_attributes:
+             - event.level
+             - event.code
+      action:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
