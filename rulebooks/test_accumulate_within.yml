@@ -1,0 +1,31 @@
+---
+- name: Test accumulate within
+  hosts: localhost
+  sources:
+    - name: Test
+      ansible.eda.generic:
+        payload:
+          - name: alert1
+            level: error
+            code: 205
+          - name: alert2
+            level: warning
+            code: 207
+          - name: alert3
+            level: error
+            code: 205
+          - name: alert4
+            level: error
+            code: 205
+        shutdown_delay: 75
+  rules:
+    - name: r1
+      condition: event.level == 'error'
+      throttle:
+          accumulate_within: 1 minutes
+          threshold: 3
+          group_by_attributes:
+             - event.level
+             - event.code
+      action:
+        debug:
