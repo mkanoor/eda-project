@@ -1,0 +1,13 @@
+---
+- name: GitHub Webhook Example
+  hosts: all
+  sources:
+    - name: my_github 
+      ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+  rules:
+    - name: Active Webhook event
+      condition: event.payload.ref == 'refs/heads/main' or event.payload.sender.url == 'https://api.github.com/users/mkanoor'
+      action:
+        debug:
