@@ -8,6 +8,6 @@
         host: 0.0.0.0
   rules:
     - name: Active Webhook event
-      condition: event.payload.payload.ref == 'refs/heads/main'
+      condition: event.payload.ref == 'refs/heads/main'
       action:
         debug:
