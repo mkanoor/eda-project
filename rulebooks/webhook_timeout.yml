@@ -1,0 +1,17 @@
+---
+- name: Webhook rulebook will restart after retry interval
+  hosts: all
+  sources:
+    - name: my_github 
+      ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+    - name: workaround 
+      ansible.eda.range:
+        limit: 2 
+        delay: "{{ retry_after | default(30) }}"
+  rules:
+    - name: Active Webhook event
+      condition: event.payload.ref == 'refs/heads/main'
+      action:
+        debug:
