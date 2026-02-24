@@ -19,8 +19,8 @@
     - name: multi condition
       condition:
         all:
-          - event.id == 1
-          - event.id == 7
-          - event.id == 9
+          - event.body.id == 1
+          - event.body.id == 7
+          - event.body.id == 9
       action:
         debug:
