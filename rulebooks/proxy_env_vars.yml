@@ -7,9 +7,9 @@
         timestamp: true
         create_index: i
         check_env_vars:
-          HTTP_PROXY: {{ var1 }}
-          HTTPS_PROXY: {{ var2 }}
-          NO_PROXY: {{ var3 }}
+          HTTP_PROXY: "{{ var1 }}"
+          HTTPS_PROXY: "{{ var2 }}"
+          NO_PROXY: "{{ var3 }}"
         payload:
           - message:
               name: Fred
