@@ -1,0 +1,22 @@
+---
+- name: SQS feedback
+  hosts: all
+  sources:
+    - name: my_sqs
+      amazon.aws.aws_sqs_queue:
+        name: "{{ queue_name }}"
+        url: "{{ queue_url }}"
+        delay_seconds: 10
+        region: "{{ region }}"
+        feedback: "{{ feedback }}"
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
+  rules:
+    - name: multi condition
+      condition:
+        all:
+          - event.body.id == 1
+          - event.body.id == 7
+          - event.body.id == 9
+      action:
+        debug:
