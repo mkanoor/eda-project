@@ -5,6 +5,7 @@
   sources:
     - ansible.eda.generic:
         loop_count: "{{ loop_count | default(5) }}"
+        blob_size: "{{ blob_size | default(2700) }}"
         create_index: j
         payload:
           - name: Fred
