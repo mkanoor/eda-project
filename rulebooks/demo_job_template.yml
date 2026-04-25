@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.generic:
-        loop_count: {{ loop_count | default(5) }}
+        loop_count: "{{ loop_count | default(5) }}"
         create_index: j
         payload:
           - name: Fred
