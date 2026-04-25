@@ -1,0 +1,17 @@
+---
+- name: Demo Job Template
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        loop_count: {{ loop_count | default(5) }}
+        create_index: j
+        payload:
+          - name: Fred
+
+  rules:
+    - name: "Run workflow template"
+      condition: event.j >= 0
+      action:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
