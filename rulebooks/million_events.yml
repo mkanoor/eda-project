@@ -5,7 +5,7 @@
     - name: generic
       ansible.eda.generic:
         loop_count: "{{ max_events | default('1000000') }}"
-        shutdown_aftre: "{{ max_wait | default('3600') }}"
+        shutdown_after: "{{ max_wait | default('3600') }}"
         create_index: i
         payload:
           - name: fred
