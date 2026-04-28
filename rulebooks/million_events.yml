@@ -2,9 +2,13 @@
 - name: "Create 1 milliom events"
   hosts: all
   sources:
-    - name: range
-      ansible.eda.range:
-        limit: "{{ max_events | default('1000000') }}"
+    - name: generic
+      ansible.eda.generic:
+        loop_count: "{{ max_events | default('1000000') }}"
+        shutdown_aftre: "{{ max_wait | default('3600') }}"
+        create_index: i
+        payload:
+          - name: fred
   rules:
     - name: Rule 
       condition: event.i is defined
