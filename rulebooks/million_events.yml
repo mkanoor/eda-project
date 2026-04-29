@@ -7,6 +7,7 @@
         loop_count: "{{ max_events | default('1000000') }}"
         shutdown_after: "{{ max_wait | default('3600') }}"
         create_index: i
+        blob_size : "{{ blob_size | default('256') }}"
         payload:
           - name: fred
   rules:
