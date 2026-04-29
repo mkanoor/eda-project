@@ -1,6 +1,7 @@
 ---
 - name: "Create 1 milliom events"
   hosts: all
+  execution_strategy: parallel
   sources:
     - name: generic
       ansible.eda.generic:
