@@ -1,0 +1,24 @@
+---
+- name: kafka with avro dynamic schema
+  hosts: all
+  sources:
+    - name: my_avro_kafka
+      ansible.eda.kafka:
+        host: "{{ host | default('localhost') }}"
+        port: "{{ port | default('9092') }}"
+        encoding: "{{ encoding | default('utf-8') }}"
+        topic: "{{ topic | default('demo') }}"
+        group_id: "{{ group_id | default(None) }}"
+        offset: "{{ offset | default('latest') }}"
+        security_protocol: "{{ security_protocol | default('PLAINTEXT') }}"
+        sasl_mechanism: "{{ sasl_mechanism | default('PLAIN') }}"
+        sasl_plain_username: "{{ sasl_plain_username | default(None) }}"
+        sasl_plain_password: "{{ sasl_plain_password | default(None) }}"
+        message_format: "{{ message_format | default('json') }}"
+        avro_schema_file: "{{ eda.filename.avro_schema_file | default(None) }}"
+        schema_registry_url: "{{ schema_registry_url | default(None) }}"
+  rules:
+    - name: match all avro
+      condition: true
+      action:
+        debug:
