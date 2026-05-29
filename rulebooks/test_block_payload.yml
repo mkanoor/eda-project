@@ -1,0 +1,12 @@
+---
+- name: Allow for users to debug file contents
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        payload_file: "{{ eda.filename.test_payload_file }}"
+        shutdown_after: "{{ shutdown_after | default('500') | int }}"
+  rules:
+    - name: test
+      condition: true
+      action:
+        debug:
