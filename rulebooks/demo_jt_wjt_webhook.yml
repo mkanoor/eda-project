@@ -1,0 +1,23 @@
+---
+- name: Controller Demo with Parallel Strategy
+  hosts: all
+  execution_strategy: parallel
+  sources:
+    - ansible.eda.webhook:
+         port: 5555
+         host: 127.0.0.1
+
+  rules:
+    - name: Run JT
+      condition: event.payload.type == "job_template"
+      action:
+        run_job_template:
+          name: Demo Job Template
+          organization: Default
+    - name: Run WJT
+      condition: event.payload.type == "workflow"
+      action:
+        run_workflow_template:
+          name: Demo Workflow
+          organization: Default
+...
