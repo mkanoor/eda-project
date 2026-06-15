@@ -13,11 +13,11 @@
       action:
         run_job_template:
           name: Demo Job Template
-          organization: Default
+          organization: cac-org-1
     - name: Run WJT
       condition: event.payload.type == "workflow"
       action:
         run_workflow_template:
-          name: Demo Workflow
-          organization: Default
+          name: Demo Workflow Template
+          organization: cac-org-1
 ...
