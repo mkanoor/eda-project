@@ -12,12 +12,12 @@
       condition: event.payload.type == "job_template"
       action:
         run_job_template:
-          name: Demo Job Template
-          organization: cac-org-1
+          name: "{{ job_template | default('Demo Job Template') }}"
+          organization: "{{ organization | default('Default') }}"
     - name: Run WJT
       condition: event.payload.type == "workflow"
       action:
         run_workflow_template:
-          name: Demo Workflow Template
-          organization: cac-org-1
+          name: "{{ workflow | default('Demo Workflow Template') }}"
+          organization: "{{ organization | default('Default') }}"
 ...
