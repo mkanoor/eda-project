@@ -17,7 +17,7 @@
       action:
         debug:
           msg: 
-           - "Opened {{ events.pr_opened.payload.created_at }}"
-           - "Closed {{ events.pr_closed.payload.closed_at }}"
+           - "Opened {{ events.pr_opened.payload.pull_request.created_at }}"
+           - "Closed {{ events.pr_closed.payload.pull_request.closed_at }}"
            - "PR Number {{ events.pr_closed.payload.number }}"
 ...
