@@ -1,0 +1,23 @@
+---
+- name: GitHub Webhook demo tracks PR opening and closing
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        port: "{{ port | default(5555) }}"
+        host: 0.0.0.0
+  rules:
+    - name: Track PR opening and closing
+      condition:
+        all:
+          - events.pr_opened << event.payload.pull_request.state == 'open'
+          - >
+            events.pr_closed << event.payload.pull_request.state == 'closed' and
+            event.payload.pull_request.merged and
+            events.pr_opened.payload.pull_request.id == event.payload.pull_request.id
+      action:
+        debug:
+          msg: 
+           - "Opened {{ events.pr_opened.payload.created_at }}"
+           - "Closed {{ events.pr_closed.payload.closed_at }}"
+           - "PR Number {{ events.pr_closed.payload.number }}"
+...
