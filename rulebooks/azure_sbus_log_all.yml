@@ -9,7 +9,7 @@
         azure_client_secret: "{{azure_client_secret}}"
         azure_namespace: "{{azure_namespace}}"
         azure_topic_name: "{{azure_topic_name}}"
-        azure_subscription_name: "{{azure_subscription}}"
+        azure_subscription_name: "{{azure_subscription_name}}"
   rules:
     - name: r1
       condition: true
