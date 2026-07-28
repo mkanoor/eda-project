@@ -1,0 +1,17 @@
+---
+- name: Get Events from Azure Service Bus
+  hosts: all
+  sources:
+    - name: Azure Service Bus
+      ansible.eda.azure_service_bus:
+        azure_tenant_id: "{{azure_tenant_id}}"
+        azure_client_id: "{{azure_client_id}}"
+        azure_client_secret: "{{azure_client_secret}}"
+        azure_namespace: "{{azure_namespace}}"
+        topic_name: "{{azure_topic_name}}"
+        subscription_name: "{{azure_subscription}}"
+  rules:
+    - name: r1
+      condition: true
+      action:
+        print_event:
