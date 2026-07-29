@@ -1,0 +1,16 @@
+---
+- name: Get Events from Azure Service Bus Queue
+  hosts: all
+  sources:
+    - name: Azure Service Bus
+      azure.azcollection.azure_service_bus:
+        azure_tenant_id: "{{azure_tenant_id}}"
+        azure_client_id: "{{azure_client_id}}"
+        azure_client_secret: "{{azure_client_secret}}"
+        azure_namespace: "{{azure_namespace}}"
+        queue_name: "{{queue_name}}"
+  rules:
+    - name: r1
+      condition: true
+      action:
+        print_event:
