@@ -19,10 +19,10 @@
     - name: Webhook JT rule
       condition: event.payload is defined
       action:
-        post_events: true
         run_job_template:
           name: "{{ jt_name | default('Demo Job Template') }}"
           organization: "{{ organization | default('Default') }}"
+          post_events: true
           job_args:
             extra_vars: 
                sleep: "{{ sleep_seconds | default('5') }}"
