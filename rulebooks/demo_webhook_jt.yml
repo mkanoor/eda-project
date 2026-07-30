@@ -17,12 +17,17 @@
         host: 0.0.0.0
   rules:
     - name: Webhook JT rule
-      condition: true
+      condition: event.payload is defined
       action:
+        post_events: true
         run_job_template:
           name: "{{ jt_name | default('Demo Job Template') }}"
           organization: "{{ organization | default('Default') }}"
           job_args:
             extra_vars: 
                sleep: "{{ sleep_seconds | default('5') }}"
+    - name: Catch All Rule
+      condition: true
+      action:
+        print_event:
 ...
