@@ -10,9 +10,6 @@
         startup_delay: 429
         payload:
           - i : 0
-    - ansible.eda.webhook:
-        port: 5556
-        host: 0.0.0.0
     - ansible.eda.generic:
         startup_delay: 500
         payload:
