@@ -7,8 +7,8 @@
         payload:
           - i : 0
     - ansible.eda.webhook:
-        port: 6666
-        host: 0.0.0.1
+        port: 6667
+        host: 0.0.0.0
     - ansible.eda.generic:
         startup_delay: 500
         payload:
