@@ -14,6 +14,9 @@
         startup_delay: 500
         payload:
           - i : 0
+    - ansible.eda.webhook:
+        port: 6666
+        host: 0.0.0.0
   rules:
     - name: Webhook event
       condition: true
@@ -37,4 +40,4 @@
     - name: Webhook event
       condition: true
       action:
-        print_event:
+        debug:
