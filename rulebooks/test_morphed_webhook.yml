@@ -3,7 +3,7 @@
   hosts: all
   sources:
     - ansible.eda.generic:
-        startup_delay: 299
+        startup_delay: 2990
         payload:
           - i : 0
     - ansible.eda.generic:
