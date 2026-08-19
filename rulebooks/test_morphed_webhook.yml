@@ -7,7 +7,7 @@
         payload:
           - i : 0
     - ansible.eda.generic:
-        startup_delay: 400
+        startup_delay: 429
         payload:
           - i : 0
     - ansible.eda.generic:
