@@ -1,0 +1,39 @@
+---
+- name: RuleSet 1 morphed for testing
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        startup_delay: 400
+        payload:
+          - i : 0
+    - ansible.eda.webhook:
+        port: 6666
+        host: 0.0.0.0
+    - ansible.eda.generic:
+        startup_delay: 500
+        payload:
+          - i : 0
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        debug:
+- name: RuleSet 2 morphed for testing
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        startup_delay: 400
+        payload:
+          - i : 0
+    - ansible.eda.webhook:
+        port: 5555
+        host: 0.0.0.0
+    - ansible.eda.generic:
+        startup_delay: 500
+        payload:
+          - i : 0
+  rules:
+    - name: Webhook event
+      condition: true
+      action:
+        print_event:
