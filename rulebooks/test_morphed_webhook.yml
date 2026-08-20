@@ -14,6 +14,10 @@
         startup_delay: 500
         payload:
           - i : 0
+    - name: "My Webhook1" 
+      ansible.eda.webhook:
+        port: 5556
+        host: 0.0.0.0
   rules:
     - name: Webhook event
       condition: true
@@ -26,7 +30,8 @@
         startup_delay: 401
         payload:
           - i : 0
-    - ansible.eda.webhook:
+    - name: "My Webhook2" 
+      ansible.eda.webhook:
         port: 5555
         host: 0.0.0.0
     - ansible.eda.generic:
