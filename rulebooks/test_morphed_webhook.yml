@@ -14,7 +14,7 @@
         startup_delay: 500
         payload:
           - i : 0
-    - name: "My Webhook1" 
+    - name: "My Webhook0" 
       ansible.eda.webhook:
         port: 5556
         host: 0.0.0.0
