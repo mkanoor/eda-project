@@ -15,7 +15,7 @@
         payload:
           - i : 0
     - ansible.eda.webhook:
-        port: 6556
+        port: 7556
         host: 0.0.0.0
   rules:
     - name: Webhook event
