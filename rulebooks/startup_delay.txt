@@ -1,0 +1,13 @@
+---
+- name: Startup Delay Ruleset
+  hosts: all
+  sources:
+    - ansible.eda.generic:
+        startup_delay: 599 
+        payload:
+          - i : 0
+  rules:
+    - name: Simple Event
+      condition: true
+      action:
+        debug:
