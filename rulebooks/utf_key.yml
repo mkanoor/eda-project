@@ -17,8 +17,7 @@
     - name: "Square accessor"
       condition: event.message["नाम"] == "മധു" 
       action:
-        print_event:
-          pretty: True 
+        debug:
     - name: English comparison using dot notation
       condition: event.message.name == "Fred"
       action:
